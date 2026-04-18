@@ -282,17 +282,10 @@ Increase inotify watchers: `echo "fs.inotify.max_user_watches=524288" | sudo tee
 
 ## Important Notes for HPE VM Essentials Platform
 
-- **Repo hygiene:** Always remove temporary Ubuntu repos after package installation. HPE's support tooling (`zion` stack) expects only HPE-managed repos. Packages installed from external repos persist fine — only the repo entry needs to be removed.
+- **Repo hygiene:** Always remove temporary Ubuntu repos after package installation. 
 - **GRUB_CMDLINE_LINUX vs GRUB_CMDLINE_LINUX_DEFAULT:** On VME hosts, GPU and CPU power parameters live in `GRUB_CMDLINE_LINUX`, not `GRUB_CMDLINE_LINUX_DEFAULT`. Add `i915.enable_gvt=1` to the correct variable.
 - **VT-d not required:** GVT-g does not need VT-d/IOMMU. Intel explicitly disables IOMMU for the iGPU on Kaby Lake anyway. VT-x is sufficient.
 - **VME GPU feature:** As of this writing, HPE VM Essentials does not expose GPU passthrough through the Morpheus/VME UI. This process is performed directly via `virsh` on the KVM host. When HPE ships native GPU support, this manual XML approach may be superseded.
-
----
-
-## Related Projects
-
-- [pve-to-vme](https://github.com/yourusername/pve-to-vme) — VM migration toolkit from Proxmox VE to HPE VM Essentials
-- [vme-netconfig](https://github.com/yourusername/vme-netconfig) — HPE VME network configuration script (Converged + Decoupled topologies)
 
 ---
 
