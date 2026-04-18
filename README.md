@@ -2,8 +2,7 @@
 
 > **Status:** Working ✅  
 > **Platform:** HPE VM Essentials (VME) — KVM/libvirt  
-> **Guest OS:** Ubuntu 24.04 LTS  
-> **Host OS:** Ubuntu 24.04 LTS (HPE VME zion stack)
+
 
 ---
 
