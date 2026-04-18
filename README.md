@@ -54,7 +54,7 @@ Kaby Lake (Gen9) is not supported by the current Intel OpenVINO runtime for Immi
 
 ## Prerequisites
 
-- HPE VM Essentials host running Ubuntu 24.04 LTS (zion stack)
+- HPE VM Essentials host running Ubuntu 24.04 LTS
 - Intel CPU with iGPU, Kaby Lake (Gen9) or newer (GVT-g supported up to Ice Lake)
 - VT-x enabled in BIOS (VT-d/IOMMU not required for GVT-g)
 - Immich running in Docker on an Ubuntu 24.04 guest VM
