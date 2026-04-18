@@ -31,11 +31,12 @@ The Immich VM (`photos`) runs on its own dedicated physical host (`vme4`) — an
 
 ### Why Intel GVT-g instead of full PCIe passthrough?
 
-Intel explicitly disables IOMMU for the iGPU on Kaby Lake platform:
+Kaby Lake iGPUs can support full PCIe passthrough via VFIO when VT-d is enabled in BIOS and intel_iommu=on is set — sometimes also requiring x-igd-opregion=on for display output. However, on this specific board the firmware DMAR table explicitly disables IOMMU for the iGPU:
 ```
 DMAR: Disabling IOMMU for graphics on this chipset
 ```
-This means traditional VFIO/PCIe passthrough is not possible for the HD 630 on this generation. GVT-g creates a **mediated virtual GPU device** that is presented to the guest with no IOMMU requirement. It is the same mechanism Proxmox uses under the hood for Intel iGPU sharing.
+This is an OEM/board-level firmware decision, not a universal Kaby Lake silicon limitation. On this hardware, full PCIe passthrough is not possible regardless of software configuration. GVT-g (mediated device passthrough) is the correct path — it creates a virtual GPU slice presented to the guest with no IOMMU requirement.
+If your board does not have this DMAR restriction (i.e., VT-d works for your iGPU), full PCIe passthrough with VFIO may be an option and will give the guest exclusive GPU access. GVT-g remains useful even then since it allows sharing the iGPU across multiple VMs simultaneously.
 
 ### Why not OpenVINO for ML acceleration?
 
